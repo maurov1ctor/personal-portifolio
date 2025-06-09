@@ -259,6 +259,7 @@ button[type="submit"]:hover {
   padding: 2rem 1rem;
   border-top: 2px solid #00ff66;
   width: 100%;
+  height: auto;
   position: relative;
   bottom: 0;
 }
@@ -292,4 +293,16 @@ button[type="submit"]:hover {
 
 
   
+}
+
+.footer {
+  background-color: #11a234;
+  color: #f1f1f1;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 2px solid #00ff66;
+  width: 100%;
+  height: auto;
+  position: relative;
+  bottom: 0;
 }
