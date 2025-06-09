@@ -1,0 +1,280 @@
+/* Reset e estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0e1411;
+  color: #f1f1f1;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background-color: #111914;
+  box-shadow: 0 2px 10px rgba(0, 255, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: #90ee90;
+}
+
+/* Botão do menu  */
+.menu-toggle {
+  display: none; 
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #90ee90;
+  cursor: pointer;
+}
+
+/* Menu de navegação */
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Seção Hero */
+.hero {
+  padding: 4rem 2rem;
+  background-color: #151b17;
+  text-align: center;
+  border-bottom: 2px solid #00ff66;
+  border-top: 2px solid #00ff66;
+}
+
+.hero h2 {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  font-family: monospace;
+  border-right: 5px solid;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 
+              typing 2s steps(18),
+              cursor .4 step-end infinite alternate;
+}
+
+@keyframes typing {
+  from { width: 0 }
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #00ff66;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.hero .btn:hover {
+  background-color: #00cc55;
+}
+
+/* Seções gerais */
+section {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #90ee90;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+/* Grid de projetos */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.projects-grid div {
+  background-color: #1b1f1d;
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.projects-grid div:hover {
+  transform: scale(1.03);
+  background-color: #232a26;
+}
+
+/* Lista de habilidades */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skills-list li {
+  list-style: none;
+  background-color: #222;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  font-weight: 500;
+  border: 1px solid #444;
+  transition: background 0.3s;
+}
+
+.skills-list li:hover {
+  background-color: #333;
+}
+
+/* Formulário de contato */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+input[type="email"] {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #1c1c1c;
+  color: #fff;
+}
+
+button[type="submit"] {
+  background-color: #00ff66;
+  color: #000;
+  font-weight: bold;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #00cc55;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; 
+    position: absolute;
+    right: 2rem;
+    top: 1.5rem;
+    z-index: 1100;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #111914;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    border-top: 1px solid #00ff66;
+    z-index: 1000;
+  }
+
+  .nav.open {
+    max-height: 300px;
+    opacity: 1;
+    padding: 1rem 2rem;
+    pointer-events: auto;
+  }
+
+  .nav a {
+    margin: 0.5rem 0;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-list {
+    flex-direction: column;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .footer {
+  background-color: #11a234;
+  color: #f1f1f1;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 2px solid #00ff66;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.social-links a {
+  color: #90ee90;
+  margin: 0 1rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #00ff66;
+}
+
+  
+}
