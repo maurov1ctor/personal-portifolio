@@ -71,12 +71,30 @@ header h1 {
   white-space: nowrap;
   overflow: hidden;
   animation: 
-              typing 2s steps(18),
-              cursor .4 step-end infinite alternate;
+              typingCycle 10s infinite,
+              blink .5s step-end infinite;
 }
 
-@keyframes typing {
-  from { width: 0 }
+@keyframes typingCycle {
+  0% {
+    width: 0;
+  }
+  20% {
+    width: 100%;
+  }
+
+  70% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+
+@keyframes blink {
+  50% { border-color: transparent }
 }
 
 .hero p {
