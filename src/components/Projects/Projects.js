@@ -3,6 +3,7 @@ import './Projects.css';
 
 const Projects = () => (
   <section id="projects">
+    <div className="container">
     <h3>Projects</h3>
     <div className="projects-grid">
       <div>
@@ -17,6 +18,7 @@ const Projects = () => (
         <h4>Project 3: Basic CRUD with Node.JS</h4>
         <p>A basic backend CRUD structure with Node.JS .</p>
       </div>
+    </div>
     </div>
   </section>
 );
