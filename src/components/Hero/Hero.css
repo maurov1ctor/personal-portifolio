@@ -1,0 +1,83 @@
+.hero {
+  padding: 4rem 2rem;
+  background-color: #151b17;
+  text-align: center;
+  border-bottom: 2px solid #00ff66;
+  border-top: 2px solid #00ff66;
+}
+
+.hero h2 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  font-family: monospace;
+  border-right: 5px solid;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 
+              typingCycle 10s infinite,
+              blink .5s step-end infinite;
+}
+
+@keyframes typingCycle {
+  0% {
+    width: 0;
+  }
+  20% {
+    width: 100%;
+  }
+
+  70% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #00ff66;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.hero .btn:hover {
+  background-color: #00cc55;
+}
+
+@media (max-width: 768px) {
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+   .menu-toggle {
+    display: block; 
+    position: absolute;
+    right: 2rem;
+    top: 1.5rem;
+    z-index: 1100;
+  }
+}

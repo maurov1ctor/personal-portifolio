@@ -1,0 +1,13 @@
+section {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #90ee90;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
