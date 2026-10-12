@@ -1,91 +1,45 @@
-/* Faixa clara: contraste invertido */
-#contact {
-  padding: 8rem 0 6rem;
-  color: var(--navy-900);
-}
-
-#contact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    repeating-linear-gradient(-55deg, rgba(22, 80, 255, 0.07) 0 2px, transparent 2px 26px),
-    linear-gradient(110deg, var(--white), var(--ice));
-  clip-path: polygon(0 3.5rem, 100% 0, 100% 100%, 0 100%);
-}
-
-#contact .section-title__num {
-  -webkit-text-stroke-color: var(--blue-500);
-}
-
-#contact .section-title__text::after {
-  background: var(--blue-500);
-}
-
-#contact form {
+.contact form {
   display: flex;
-  gap: 1.2rem;
-  max-width: 640px;
-  padding-left: 0.6rem;
+  align-items: flex-end;
+  gap: 2rem;
+  max-width: 52rem;
 }
 
-#contact input[type="email"] {
+/* Campo em linha única, grande, só com sublinhado */
+.contact input[type="email"] {
   flex: 1;
   min-width: 0;
-  padding: 0.85rem 1.2rem;
-  border: 3px solid var(--navy-900);
+  padding: 0.6rem 0;
+  border: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 0;
-  background-color: var(--white);
-  color: var(--navy-900);
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  font-weight: 500;
-  transform: skewX(var(--skew));
-  box-shadow: 6px 6px 0 var(--blue-500);
-  transition: box-shadow 0.18s ease;
-}
-
-#contact input[type="email"]::placeholder {
-  color: #5a668f;
-}
-
-#contact input[type="email"]:focus {
-  outline: none;
-  box-shadow: 6px 6px 0 var(--cyan), 0 0 0 3px var(--blue-500);
-}
-
-#contact button[type="submit"] {
-  padding: 0.85rem 2.4rem;
-  border: 3px solid var(--navy-900);
-  border-radius: 0;
-  background-color: var(--navy-900);
+  background: transparent;
   color: var(--white);
-  font-family: var(--font-ui);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-family: var(--font-serif);
   font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  transform: skewX(var(--skew));
-  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  font-size: clamp(1.6rem, 3.6vw, 3rem);
+  line-height: 1.2;
+  transition: border-color 0.3s ease;
 }
 
-#contact button[type="submit"]:hover {
-  background-color: var(--blue-500);
-  border-color: var(--blue-500);
-  transform: skewX(var(--skew)) translate(-3px, -3px);
+.contact input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.35);
 }
 
-@media (max-width: 768px) {
-  #contact {
-    padding: 6.5rem 0 4.5rem;
+.contact input[type="email"]:focus {
+  outline: none;
+  border-color: var(--moon);
+}
+
+@media (max-width: 820px) {
+  .contact form {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
   }
 
-  #contact form {
-    flex-direction: column;
+  .contact input[type="email"] {
     width: 100%;
-    padding: 0 0.6rem;
+    flex: none;
   }
 }

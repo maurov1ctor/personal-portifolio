@@ -1,60 +1,69 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css';
+import Moon, { moonPhase, moonPhaseName } from '../Moon/Moon';
 
-const LINKS = ['about', 'projects', 'skills', 'contact'];
+const TABS = ['about', 'projects', 'skills', 'contact'];
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState('');
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  // Destaca no menu a seção que está no meio da tela
+// Períodos do dia, como no calendário do jogo
+const SLOTS = [
+  [0, 'Dark Hour'],
+  [1, 'Late Night'],
+  [5, 'Early Morning'],
+  [7, 'Morning'],
+  [12, 'Daytime'],
+  [15, 'After School'],
+  [18, 'Evening'],
+  [23, 'Late Night'],
+];
+
+const slotFor = (hour) => SLOTS.filter(([start]) => hour >= start).pop()[1];
+
+const Header = ({ current }) => {
+  const [now, setNow] = useState(() => new Date());
+
   useEffect(() => {
-    if (!('IntersectionObserver' in window)) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: '-45% 0px -50% 0px' }
-    );
-
-    LINKS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    const timer = setInterval(() => setNow(new Date()), 30000);
+    return () => clearInterval(timer);
   }, []);
 
+  const hour = now.getHours();
+  const phase = moonPhase(now);
+
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [menuOpen]);
+    document.documentElement.toggleAttribute('data-dark-hour', hour === 0);
+  }, [hour]);
 
   return (
     <header className="header">
-      <h1>DevPortfolio</h1>
+      <h1>
+        <a href="#home">DevPortfolio</a>
+      </h1>
 
-      <button
-        className="menu-toggle"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Abrir ou fechar menu"
-        aria-expanded={menuOpen}
-      >
-        {menuOpen ? '✕' : '☰'}
-      </button>
+      {current !== 'home' && (
+        <nav className="nav">
+          <a href="#home" className="nav__back">Menu</a>
+          {TABS.map((id) => (
+            <a key={id} href={`#${id}`} aria-current={current === id ? 'page' : undefined}>
+              {id}
+            </a>
+          ))}
+        </nav>
+      )}
 
-      <nav className={`nav ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(false)}>
-        {LINKS.map((id) => (
-          <a key={id} href={`#${id}`} className={active === id ? 'active' : ''}>
-            {id}
-          </a>
-        ))}
-      </nav>
+      <div className="hud">
+        <span className="hud__date">
+          {now.getDate()} {MONTHS[now.getMonth()]}
+        </span>
+        <span className={`hud__day hud__day--${now.getDay()}`}>{DAYS[now.getDay()]}</span>
+        <span className="hud__slot">{slotFor(hour)}</span>
+        <span className="hud__moon" title={moonPhaseName(phase)}>
+          <Moon phase={phase} />
+          <span>{moonPhaseName(phase)}</span>
+        </span>
+      </div>
     </header>
   );
 };

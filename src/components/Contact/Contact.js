@@ -1,22 +1,18 @@
 import React from 'react';
 import './Contact.css';
-import SectionTitle from '../SectionTitle/SectionTitle';
-import useReveal from '../../hooks/useReveal';
+import ScreenTitle from '../ScreenTitle/ScreenTitle';
 
-const Contact = () => {
-  const [ref, inView] = useReveal();
+const Contact = () => (
+  <section className="contact screen__inner">
+    <span className="screen__ghost" aria-hidden="true">Contact</span>
 
-  return (
-    <section id="contact" ref={ref} className={`reveal ${inView ? 'in-view' : ''}`}>
-      <div className="container">
-      <SectionTitle index="04" as="h2">Contact</SectionTitle>
-      <form>
-        <input type="email" placeholder="your.email@example.com" aria-label="Email" />
-        <button type="submit">Send</button>
-      </form>
-      </div>
-    </section>
-  );
-};
+    <ScreenTitle index="04" as="h2">Contact</ScreenTitle>
+
+    <form className="rise" style={{ '--d': 1 }}>
+      <input type="email" placeholder="your.email@example.com" aria-label="Email" />
+      <button type="submit" className="btn-primary">Send</button>
+    </form>
+  </section>
+);
 
 export default Contact;

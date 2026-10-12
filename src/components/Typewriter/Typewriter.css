@@ -1,0 +1,19 @@
+/* O restante do texto ocupa espaço desde o início, para a caixa não mudar de tamanho */
+.typewriter__rest {
+  visibility: hidden;
+}
+
+.typewriter__next {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-size: 0.7em;
+  color: var(--moon);
+  animation: nextBob 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes nextBob {
+  to {
+    transform: translateY(4px);
+    opacity: 0.4;
+  }
+}

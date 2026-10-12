@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./About.css";
-import SectionTitle from "../SectionTitle/SectionTitle";
-import useReveal from "../../hooks/useReveal";
+import ScreenTitle from "../ScreenTitle/ScreenTitle";
+import Typewriter from "../Typewriter/Typewriter";
 
 const TABS = [
   {
@@ -23,40 +23,42 @@ const TABS = [
 
 const About = () => {
 
-  const [activeTab, setActiveTab] = useState(null);
-  const [ref, inView] = useReveal();
+  const [activeTab, setActiveTab] = useState("focus");
 
   const current = TABS.find((tab) => tab.id === activeTab);
 
   return (
-    <section id="about" ref={ref} className={`reveal ${inView ? "in-view" : ""}`}>
-      <div className="container">
-        <SectionTitle index="02">About Me</SectionTitle>
+    <section className="about screen__inner">
+      <span className="screen__ghost" aria-hidden="true">About</span>
 
-        <p>
-          Junior web developer focused on building functional and well-structured applications. Passionate about backend development, problem solving, and writing clean, maintainable code.
-        </p>
+      <ScreenTitle index="01">About Me</ScreenTitle>
 
-        <div className="about-buttons">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              className={activeTab === tab.id ? "active" : ""}
-              aria-pressed={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
+      <div className="about-grid">
+
+        <div>
+          <p className="about-lead rise" style={{ "--d": 1 }}>
+            Junior web developer focused on building functional and well-structured applications. Passionate about backend development, problem solving, and writing clean, maintainable code.
+          </p>
+
+          <div className="about-buttons rise" style={{ "--d": 2 }}>
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                className={activeTab === tab.id ? "active" : ""}
+                aria-pressed={activeTab === tab.id}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* TEXTO QUE APARECE */}
-        {current && (
-          <div className="about-content" key={current.id}>
-            <span className="about-content__tag">{current.label}</span>
-            <p>{current.text}</p>
-          </div>
-        )}
+        <div className="about-content dialog rise" style={{ "--d": 3 }}>
+          <span className="dialog__name">{current.label}</span>
+          <Typewriter text={current.text} />
+        </div>
 
       </div>
     </section>

@@ -1,0 +1,116 @@
+/* Fundo: água profunda com luz vindo de cima */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(
+    120% 95% at 78% 8%,
+    var(--azure) 0%,
+    var(--royal) 20%,
+    var(--deep) 55%,
+    var(--abyss) 100%
+  );
+  transition: background 1.2s ease;
+}
+
+.bg span {
+  position: absolute;
+}
+
+/* Manchas de luz que derivam devagar */
+.bg__blob {
+  border-radius: 50%;
+  filter: blur(90px);
+}
+
+.bg__blob--a {
+  top: -20%;
+  right: -10%;
+  width: 60vmax;
+  height: 60vmax;
+  background: var(--aqua);
+  opacity: 0.22;
+  animation: driftA 26s ease-in-out infinite alternate;
+}
+
+.bg__blob--b {
+  bottom: -35%;
+  left: -15%;
+  width: 55vmax;
+  height: 55vmax;
+  background: var(--royal);
+  opacity: 0.55;
+  animation: driftB 32s ease-in-out infinite alternate;
+}
+
+/* Raios de luz atravessando a água */
+.bg__rays {
+  inset: -40%;
+  background: repeating-linear-gradient(
+    104deg,
+    transparent 0 5%,
+    rgba(255, 255, 255, 0.07) 5% 5.6%,
+    transparent 5.6% 11%,
+    rgba(98, 240, 255, 0.07) 11% 14%,
+    transparent 14% 19%,
+    rgba(255, 255, 255, 0.04) 19% 23%
+  );
+  -webkit-mask-image: radial-gradient(55% 60% at 68% 28%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(55% 60% at 68% 28%, #000 0%, transparent 78%);
+  transform-origin: 70% 0;
+  animation: sway 20s ease-in-out infinite alternate;
+}
+
+/* Ondulações concêntricas subindo do canto inferior */
+.bg__ripples {
+  inset: 0;
+  background: repeating-radial-gradient(
+    ellipse 120% 70% at 12% 118%,
+    transparent 0 46px,
+    rgba(255, 255, 255, 0.045) 46px 47px
+  );
+  -webkit-mask-image: radial-gradient(90% 80% at 10% 110%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(90% 80% at 10% 110%, #000 20%, transparent 75%);
+  animation: breathe 14s ease-in-out infinite alternate;
+}
+
+.bg__grain {
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+}
+
+@keyframes driftA {
+  to {
+    transform: translate(-12vw, 10vh) scale(1.15);
+  }
+}
+
+@keyframes driftB {
+  to {
+    transform: translate(14vw, -8vh) scale(1.1);
+  }
+}
+
+@keyframes sway {
+  from {
+    transform: rotate(-3deg) translateX(-2%);
+  }
+  to {
+    transform: rotate(3deg) translateX(2%);
+  }
+}
+
+@keyframes breathe {
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg span {
+    animation: none;
+  }
+}
