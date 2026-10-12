@@ -1,4 +1,19 @@
-/* Estilos gerais */
+/* Tema inspirado nos menus de Persona 3 */
+:root {
+  --navy-900: #030726;
+  --navy-800: #071040;
+  --blue-700: #0b2aa8;
+  --blue-500: #1650ff;
+  --cyan: #35e3ff;
+  --ice: #d9f7ff;
+  --white: #ffffff;
+  --skew: -12deg;
+  --font-display: 'Anton', Impact, 'Arial Narrow Bold', sans-serif;
+  --font-ui: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', 'Segoe UI', Tahoma, sans-serif;
+  --header-h: 68px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,15 +21,42 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0e1411;
-  color: #f1f1f1;
+  font-family: var(--font-body);
+  background-color: var(--navy-900);
+  color: var(--white);
   line-height: 1.6;
+  overflow-x: clip;
+}
+
+/* Fundo fixo: gradiente azul + listras diagonais */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(
+      -55deg,
+      rgba(255, 255, 255, 0.025) 0 2px,
+      transparent 2px 26px
+    ),
+    radial-gradient(circle at 85% 10%, rgba(53, 227, 255, 0.22), transparent 45%),
+    linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 45%, var(--blue-700) 130%);
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+::selection {
+  background: var(--cyan);
+  color: var(--navy-900);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 .container {
@@ -24,64 +66,163 @@ a {
 }
 
 section {
-  padding: 4rem 0;
+  position: relative;
+  padding: 5.5rem 0;
+  scroll-margin-top: var(--header-h);
 }
 
+/* Título de seção */
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block; 
-    position: absolute;
-    right: 2rem;
-    top: 1.5rem;
-    z-index: 1100;
-  }
+.section-title__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--cyan);
+}
 
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
+.section-title__text {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transform: skewX(-8deg);
+  padding-bottom: 0.9rem;
+}
 
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: #111914;
-    overflow: hidden;
-    max-height: 0;
+.section-title__text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 130px;
+  height: 8px;
+  background: var(--cyan);
+  transform: skewX(-30deg);
+  transform-origin: left;
+}
+
+/* Botões inclinados */
+.btn-primary,
+.btn-outline {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.3rem;
+  border: 0;
+  background: none;
+  font-family: var(--font-ui);
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.btn-primary::before,
+.btn-outline::before,
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: skewX(var(--skew));
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+.btn-primary {
+  color: var(--navy-900);
+}
+
+.btn-primary::before {
+  z-index: -1;
+  background: var(--white);
+}
+
+.btn-primary::after {
+  z-index: -2;
+  background: var(--cyan);
+  transform: skewX(var(--skew)) translate(6px, 6px);
+}
+
+.btn-primary:hover {
+  transform: translate(-3px, -3px);
+}
+
+.btn-primary:hover::before {
+  background: var(--cyan);
+}
+
+.btn-primary:hover::after {
+  background: var(--blue-500);
+  transform: skewX(var(--skew)) translate(9px, 9px);
+}
+
+.btn-outline {
+  color: var(--cyan);
+}
+
+.btn-outline::before {
+  z-index: -1;
+  box-shadow: inset 0 0 0 2px var(--cyan);
+}
+
+.btn-outline:hover {
+  color: var(--navy-900);
+  transform: translate(-3px, -3px);
+}
+
+.btn-outline:hover::before {
+  background: var(--cyan);
+}
+
+/* Entrada das seções ao rolar */
+.reveal .container {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.reveal.in-view .container {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes popIn {
+  from {
     opacity: 0;
-    pointer-events: none;
-    padding: 0;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
-    border-top: 1px solid #00ff66;
-    z-index: 1000;
+    transform: translateX(-28px);
   }
-
-  .nav.open {
-    max-height: 300px;
+  to {
     opacity: 1;
-    padding: 1rem 2rem;
-    pointer-events: auto;
+    transform: none;
   }
+}
 
-  .nav a {
-    margin: 0.5rem 0;
+@media (max-width: 768px) {
+  section {
+    padding: 4rem 0;
   }
+}
 
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .skills-list {
-    flex-direction: column;
-  }
-
-  form {
-    width: 100%;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
   }
 }
