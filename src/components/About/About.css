@@ -1,100 +1,123 @@
-/*
-section {
-  padding: 3rem 2rem;
-  max-width: 1000px;
-  margin: auto;
-}
-
-h3 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #90ee90;
-  border-bottom: 1px solid #333;
-  padding-bottom: 0.5rem;
-}
-*/
-
+/* Faixa azul com bordas inclinadas */
 #about {
-  background: linear-gradient(180deg, #08130f, #07110d);
-  border-top: 1px solid rgba(0,255,102,0.2);
-  border-bottom: 1px solid rgba(0,255,102,0.2);
+  padding: 7.5rem 0;
 }
 
-
-/* Título */
-#about h3 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #00ff66;
-  border-bottom: 1px solid #00ff66;
-  padding-bottom: 0.5rem;
+#about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(-55deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 26px),
+    linear-gradient(110deg, var(--blue-700), var(--blue-500));
+  clip-path: polygon(0 3.5rem, 100% 0, 100% calc(100% - 3.5rem), 0 100%);
 }
 
 /* Parágrafo inicial */
-#about p {
+#about .container > p {
   max-width: 700px;
-  margin-bottom: 1.5rem;
-  color: #dcdcdc;
+  font-size: 1.15rem;
+  font-weight: 500;
   line-height: 1.6;
 }
 
 /* Container dos botões */
 .about-buttons {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  padding-left: 0.5rem;
 }
 
 /* Botões */
 .about-buttons button {
-  padding: 0.5rem 1.3rem;
-  border-radius: 20px;
-  border: 1px solid #00ff66;
-  background: transparent;
-  color: #00ff66;
-  font-size: 0.9rem;
-  transition: all 0.25s ease;
+  position: relative;
+  isolation: isolate;
+  padding: 0.5rem 1.9rem;
+  border: 0;
+  background: none;
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.about-buttons button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--navy-900);
+  transform: skewX(var(--skew));
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 /* Hover */
 .about-buttons button:hover {
-  background-color: #00ff66;
-  color: #000;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+}
+
+.about-buttons button:hover::before {
+  box-shadow: 5px 5px 0 var(--cyan);
 }
 
 /* Botão ativo */
 .about-buttons button.active {
-  background-color: #00ff66;
-  color: #000;
-  box-shadow: 0 0 12px rgba(0,255,102,0.4);
+  color: var(--navy-900);
 }
 
+.about-buttons button.active::before {
+  background: var(--white);
+  box-shadow: 6px 6px 0 var(--cyan);
+}
 
-/* Caixa do conteúdo */
+/* Caixa do conteúdo: janela de diálogo */
 .about-content {
-  margin-top: 1rem;
-  padding: 1rem 1.3rem;
-  background-color: #07110d;
-  border-radius: 8px;
-  border-left: 3px solid #00ff66;
-
+  position: relative;
+  max-width: 700px;
+  margin-top: 2.6rem;
+  padding: 1.7rem 1.5rem 1.3rem;
+  background: var(--navy-900);
+  border: 2px solid var(--cyan);
+  border-left-width: 8px;
+  font-size: 1.1rem;
 
   /* animação */
-  animation: fadeSlide 0.3s ease;
+  animation: fadeSlide 0.35s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.about-content__tag {
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  padding: 0.05rem 1.1rem;
+  background: var(--white);
+  color: var(--navy-900);
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transform: skewX(var(--skew));
 }
 
 /* Animação */
 @keyframes fadeSlide {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateX(-30px) skewX(-4deg);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
@@ -102,26 +125,21 @@ h3 {
 @media (max-width: 768px) {
 
   #about {
-    padding: 2rem 1rem;
+    padding: 6rem 0;
   }
 
   .about-buttons {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.9rem;
   }
 
   .about-buttons button {
-    width: 100%;
+    min-width: 11rem;
+    text-align: left;
   }
 
-}
+  .about-buttons button:nth-child(2) { margin-left: 1.25rem; }
+  .about-buttons button:nth-child(3) { margin-left: 2.5rem; }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-section {
-  padding: 4rem 0;
 }

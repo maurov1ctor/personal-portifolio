@@ -1,18 +1,83 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+  gap: 1.75rem;
 }
 
-.projects-grid div {
-  background-color: #1b1f1d;
-  padding: 1.5rem;
-  border-radius: 10px;
-  transition: transform 0.3s;
+/* Cartão com canto cortado */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  padding: 1.6rem 1.5rem 2rem;
+  background: var(--navy-800);
+  border-top: 6px solid var(--cyan);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1), background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
 }
 
-.projects-grid div:hover {
-  transform: scale(1.03);
-  background-color: #232a26;
+.project-card__num {
+  position: absolute;
+  top: -0.6rem;
+  right: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 6.5rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(53, 227, 255, 0.3);
+  transform: skewX(-8deg);
+  transition: -webkit-text-stroke-color 0.22s ease;
+}
+
+.project-card h4 {
+  position: relative;
+  max-width: 80%;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-ui);
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.project-card p {
+  position: relative;
+  color: var(--ice);
+  transition: color 0.22s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  background: var(--white);
+  color: var(--navy-900);
+  border-color: var(--blue-500);
+}
+
+.project-card:hover p {
+  color: var(--navy-800);
+}
+
+.project-card:hover .project-card__num {
+  -webkit-text-stroke-color: var(--blue-500);
+}
+
+.reveal:not(.in-view) .project-card {
+  opacity: 0;
+}
+
+.reveal.in-view .project-card {
+  animation: popIn 0.5s cubic-bezier(0.2, 0.9, 0.2, 1) backwards;
+  animation-delay: calc(0.25s + var(--i) * 110ms);
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    min-height: 0;
+  }
 }
